@@ -4,7 +4,6 @@ import dao.AgenteRiscoDAO;
 import dao.AgenteRiscoEspDAO;
 import dao.EpiDAO;
 import dao.ExameDAO;
-import dao.TipoRiscoDAO;
 import util.Util;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,35 +13,33 @@ import javax.faces.bean.ViewScoped;
 import modelo.AgenteRisco;
 import modelo.EPI;
 import modelo.Exame;
-import modelo.TipoRisco;
+import modelo.RiscoEspecifico;
 
-@ManagedBean(name = "controleAgenteRisco")
+@ManagedBean(name = "controleAgenteRiscoEsp")
 @ViewScoped
-public class ControleAgenteRisco implements Serializable {
+public class ControleAgenteRiscoEsp implements Serializable {
 
-    private AgenteRiscoDAO<AgenteRisco> dao;
-    private AgenteRisco objeto;
-    private TipoRiscoDAO<TipoRisco> daoTipoRisco;
+    private AgenteRiscoEspDAO<RiscoEspecifico> dao;
+    private RiscoEspecifico objeto;
+    private AgenteRiscoDAO daoAgenteRisco;
     private ExameDAO daoExame;
     private Exame exame;
     private EpiDAO daoEpi;
-    private AgenteRiscoEspDAO daoAgenteRiscoEsp;
     private EPI epi;
     private List<Exame> exames;
     private List<EPI> epis;
 
-    public ControleAgenteRisco() {
-        dao = new AgenteRiscoDAO<>();
-        daoTipoRisco = new TipoRiscoDAO<>();
+    public ControleAgenteRiscoEsp() {
+        dao = new AgenteRiscoEspDAO<>();
+        daoAgenteRisco = new AgenteRiscoDAO();
         daoExame = new ExameDAO();
-        daoAgenteRiscoEsp = new AgenteRiscoEspDAO<>();
         daoEpi = new EpiDAO();
         exames = new ArrayList<>();
         epis = new ArrayList<>();
     }
 
     public String listar() {
-        return "/privado/agenterisco/listar?faces-redirect=true";
+        return "/privado/agenteriscoespecifico/listar?faces-redirect=true";
     }
 
     public void adicionarExame() {
@@ -93,7 +90,7 @@ public class ControleAgenteRisco implements Serializable {
     }
 
     public void novo() {
-        objeto = new AgenteRisco();
+        objeto = new RiscoEspecifico();
     }
 
     public void salvar() {
@@ -123,29 +120,22 @@ public class ControleAgenteRisco implements Serializable {
         }
     }
 
-    public AgenteRiscoDAO getDao() {
+    public AgenteRiscoEspDAO getDao() {
         return dao;
     }
 
-    public void setDao(AgenteRiscoDAO dao) {
+    public void setDao(AgenteRiscoEspDAO dao) {
         this.dao = dao;
     }
 
-    public AgenteRisco getObjeto() {
+    public RiscoEspecifico getObjeto() {
         return objeto;
     }
 
-    public void setObjeto(AgenteRisco objeto) {
+    public void setObjeto(RiscoEspecifico objeto) {
         this.objeto = objeto;
     }
 
-    public TipoRiscoDAO<TipoRisco> getDaoTipoRisco() {
-        return daoTipoRisco;
-    }
-
-    public void setDaoTipoRisco(TipoRiscoDAO<TipoRisco> daoTipoRisco) {
-        this.daoTipoRisco = daoTipoRisco;
-    }
 
     public Exame getExame() {
         return exame;
@@ -225,18 +215,19 @@ public class ControleAgenteRisco implements Serializable {
         this.epis = epis;
     }
 
+
     /**
-     * @return the daoAgenteRiscoEsp
+     * @return the daoAgenteRisco
      */
-    public AgenteRiscoEspDAO getDaoAgenteRiscoEsp() {
-        return daoAgenteRiscoEsp;
+    public AgenteRiscoDAO getDaoAgenteRisco() {
+        return daoAgenteRisco;
     }
 
     /**
-     * @param daoAgenteRiscoEsp the daoAgenteRiscoEsp to set
+     * @param daoAgenteRisco the daoAgenteRisco to set
      */
-    public void setDaoAgenteRiscoEsp(AgenteRiscoEspDAO daoAgenteRiscoEsp) {
-        this.daoAgenteRiscoEsp = daoAgenteRiscoEsp;
+    public void setDaoAgenteRisco(AgenteRiscoDAO daoAgenteRisco) {
+        this.daoAgenteRisco = daoAgenteRisco;
     }
 
 }

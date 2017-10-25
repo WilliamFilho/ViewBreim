@@ -6,60 +6,60 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="/templates/template.xhtml">
-        <ui:define name="titulo">Listagem Agente de Risco</ui:define>
+        <ui:define name="titulo">Listagem Agente de Risco Específico</ui:define>
         <ui:define name="conteudo">
             <h:form id="formListagem">                
                 <p:growl/>
-                <p:commandButton value="Novo" actionListener="#{controleAgenteRisco.novo()}"
+                <p:commandButton value="Novo" actionListener="#{controleAgenteRiscoEsp.novo()}"
                                  icon="ui-icon-plus" oncomplete="PF('dlg').show();"
                                  update=":formEdicao"/>
                 <div align="center">
                     <p:panelGrid columns="11">
                         <p:outputLabel value="Ordem:"/>
-                        <p:selectOneMenu value="#{controleAgenteRisco.dao.ordem}">
+                        <p:selectOneMenu value="#{controleAgenteRiscoEsp.dao.ordem}">
                             <f:selectItem itemLabel="ID" itemValue="id"/>
                             <f:selectItem itemLabel="Nome" itemValue="nome"/>
                             <p:ajax update="listagem"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="Filtro:"/>
-                        <p:inputText value="#{controleAgenteRisco.dao.filtro}" size="15">
+                        <p:inputText value="#{controleAgenteRiscoEsp.dao.filtro}" size="15">
                             <p:ajax update="listagem" event="keyup"/>
                         </p:inputText>
                         <p:commandButton value="Filtrar" update="listagem" icon="ui-icon-search"/>
                         <p:outputLabel value="Máximo objetos"/>
-                        <p:inputNumber value="#{controleAgenteRisco.dao.maximoObjetos}"
+                        <p:inputNumber value="#{controleAgenteRiscoEsp.dao.maximoObjetos}"
                                        decimalPlaces="0" decimalSeparator="" thousandSeparator=""/>
-                        <p:commandButton value="Primeiro" actionListener="#{controleAgenteRisco.dao.primeiro()}"
+                        <p:commandButton value="Primeiro" actionListener="#{controleAgenteRiscoEsp.dao.primeiro()}"
                                          icon="ui-icon-seek-first" update="listagem"/>
-                        <p:commandButton value="Anterior" actionListener="#{controleAgenteRisco.dao.anterior()}"
+                        <p:commandButton value="Anterior" actionListener="#{controleAgenteRiscoEsp.dao.anterior()}"
                                          icon="ui-icon-seek-prev" update="listagem"/>  
-                        <p:commandButton value="Próximo" actionListener="#{controleAgenteRisco.dao.proximo()}"
+                        <p:commandButton value="Próximo" actionListener="#{controleAgenteRiscoEsp.dao.proximo()}"
                                          icon="ui-icon-seek-next" update="listagem"/> 
-                        <p:commandButton value="Último" actionListener="#{controleAgenteRisco.dao.ultimo()}"
+                        <p:commandButton value="Último" actionListener="#{controleAgenteRiscoEsp.dao.ultimo()}"
                                          icon="ui-icon-seek-end" update="listagem"/>                             
                     </p:panelGrid>
                 </div>
-                <p:dataTable value="#{controleAgenteRisco.dao.listaObjetos}" var="obj" id="listagem">
+                <p:dataTable value="#{controleAgenteRiscoEsp.dao.listaObjetos}" var="obj" id="listagem">
                     <f:facet name="footer">
-                        <p:outputLabel value="#{controleAgenteRisco.dao.mensagemNavegacao}"/>
+                        <p:outputLabel value="#{controleAgenteRiscoEsp.dao.mensagemNavegacao}"/>
                     </f:facet>
                     <p:column headerText="ID">
                         <p:outputLabel value="#{obj.id}"/>
                     </p:column>
-                    <p:column headerText="Nome">
+                    <p:column headerText="Agente de Risco Específico">
                         <p:outputLabel value="#{obj.nome}"/>
                     </p:column>    
-                    <p:column headerText="Tipo de Risco">
-                        <p:outputLabel value="#{obj.tipoRisco.nome}"/>
+                    <p:column headerText="Agente de Risco">
+                        <p:outputLabel value="#{obj.agenteRisco.nome}"/>
                     </p:column>      
                     <p:column headerText="Ações">
                         <div align="center">
-                            <p:commandButton actionListener="#{controleAgenteRisco.editar(obj.id)}"
+                            <p:commandButton actionListener="#{controleAgenteRiscoEsp.editar(obj.id)}"
                                              icon="ui-icon-pencil"
                                              title="Editar"
                                              oncomplete="PF('dlg').show();"
                                              update=":formEdicao"/>
-                            <p:commandButton actionListener="#{controleAgenteRisco.remover(obj.id)}"
+                            <p:commandButton actionListener="#{controleAgenteRiscoEsp.remover(obj.id)}"
                                              icon="ui-icon-trash" title="Remover"
                                              update="@form"
                                              onclick="if (!confirm('Confirma a exclusão?'))
@@ -78,46 +78,34 @@
                             <div align="center">
                                 <p:panelGrid columns="2">                 
                                     <p:outputLabel value="ID"/>
-                                    <p:inputText value="#{controleAgenteRisco.objeto.id}" readonly="true" size="5"/>
-                                    <p:outputLabel value="Nome" for="txtNome"/>
-                                    <p:inputText id="txtNome" value="#{controleAgenteRisco.objeto.nome}" size="50" maxlength="50"
+                                    <p:inputText value="#{controleAgenteRiscoEsp.objeto.id}" readonly="true" size="5"/>
+                                    <p:outputLabel value="Agente de Risco Específico" for="txtNome"/>
+                                    <p:inputText id="txtNome" value="#{controleAgenteRiscoEsp.objeto.nome}" size="50" maxlength="50"
                                                  placeholder="Obrigatório"/>
-                                    <p:outputLabel value="TipoRisco" for="selectTipoRisco"/>
-                                    <p:selectOneMenu id="selectTipoRisco" value="#{controleAgenteRisco.objeto.tipoRisco}">
-                                        <f:converter converterId="converterTipoRisco"/>
+                                    <p:outputLabel value="AgenteRisco" for="selectAgenteRisco"/>
+                                    <p:selectOneMenu id="selectAgenteRisco" value="#{controleAgenteRiscoEsp.objeto.agenteRisco}">
+                                        <f:converter converterId="converterAgenteRisco"/>
                                         <f:selectItem itemLabel="Selecione um registro" noSelectionOption="true"/>
-                                        <f:selectItems value="#{controleAgenteRisco.daoTipoRisco.listaTodos}" var="t" itemLabel="#{t.nome}"/>                                               
+                                        <f:selectItems value="#{controleAgenteRiscoEsp.daoAgenteRisco.listaTodos}" var="ar" itemLabel="#{ar.nome}"/>                                               
                                     </p:selectOneMenu>
                                 </p:panelGrid>
                             </div>                            
                         </p:tab>
-                        
-                        <p:tab title="Agente de Risco Específicos">    
-                            <p:dataTable value="#{controleAgenteRisco.daoAgenteRiscoEsp.listaTodos}"
-                                         var="are">
-                                <f:facet name="header">                        
-                                </f:facet>
-                                <p:column headerText="Agentes de Risco Específicos">
-                                    <p:outputLabel value="#{are.nome}"/>
-                                </p:column>
-                                                        
-                            </p:dataTable>
-                        </p:tab>
-                        
+
                         <p:tab title="Exames">    
-                            <p:dataTable value="#{controleAgenteRisco.objeto.exames}"
+                            <p:dataTable value="#{controleAgenteRiscoEsp.objeto.exames}"
                                          var="exa" rowIndexVar="idxExa" id="listaExames">
                                 <f:facet name="header">
                                     <p:panelGrid columns="2">
 
-                                        <p:selectCheckboxMenu id="selectExame" value="#{controleAgenteRisco.exames}" label="Exames"
+                                        <p:selectCheckboxMenu id="selectExame" value="#{controleAgenteRiscoEsp.exames}" label="Exames"
                                                               filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
                                             <f:converter converterId="converterExame"/>
-                                            <f:selectItems value="#{controleAgenteRisco.daoExame.listaTodos}" var="exam" itemLabel="#{exam.nome}" />
+                                            <f:selectItems value="#{controleAgenteRiscoEsp.daoExame.listaTodos}" var="exam" itemLabel="#{exam.nome}" />
                                         </p:selectCheckboxMenu>
 
                                         <p:commandButton value="Adicionar"
-                                                         actionListener="#{controleAgenteRisco.adicionarExame()}"
+                                                         actionListener="#{controleAgenteRiscoEsp.adicionarExame()}"
                                                          update="listaExames :formEdicao:growl"
                                                          id="btnAdicionarExame"
                                                          process="btnAdicionarExame selectExame"
@@ -130,7 +118,7 @@
                                 <p:column headerText="Ações">
                                     <div align="center">
                                         <p:commandButton id="btnRemoverExame"
-                                                         actionListener="#{controleAgenteRisco.removerExame(idxExa)}"
+                                                         actionListener="#{controleAgenteRiscoEsp.removerExame(idxExa)}"
                                                          process="btnRemoverExame" update="listaExames :formEdicao:growl"
                                                          icon="ui-icon-trash"
                                                          onclick="if (!confirm('Confirma a remoção do exame?'))
@@ -141,17 +129,17 @@
                         </p:tab>     
 
                         <p:tab title="Epis">    
-                            <p:dataTable value="#{controleAgenteRisco.objeto.epis}"
+                            <p:dataTable value="#{controleAgenteRiscoEsp.objeto.epis}"
                                          var="epi" rowIndexVar="idxEpi" id="listaEpis">
                                 <f:facet name="header">
                                     <p:panelGrid columns="2">
-                                        <p:selectCheckboxMenu id="selectEpi" value="#{controleAgenteRisco.epis}" label="EPIs"
+                                        <p:selectCheckboxMenu id="selectEpi" value="#{controleAgenteRiscoEsp.epis}" label="EPIs"
                                                               filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
                                             <f:converter converterId="converterEpi"/>
-                                            <f:selectItems value="#{controleAgenteRisco.daoEpi.listaTodos}" var="cepi" itemLabel="#{cepi.nome}"/>
+                                            <f:selectItems value="#{controleAgenteRiscoEsp.daoEpi.listaTodos}" var="cepi" itemLabel="#{cepi.nome}" />
                                         </p:selectCheckboxMenu>
                                         <p:commandButton value="Adicionar"
-                                                         actionListener="#{controleAgenteRisco.adicionarEpi()}"
+                                                         actionListener="#{controleAgenteRiscoEsp.adicionarEpi()}"
                                                          update="listaEpis :formEdicao:growl"
                                                          id="btnAdicionarEpi"
                                                          process="btnAdicionarEpi selectEpi"
@@ -164,7 +152,7 @@
                                 <p:column headerText="Ações">
                                     <div align="center">
                                         <p:commandButton id="btnRemoverEpi"
-                                                         actionListener="#{controleAgenteRisco.removerEpi(idxEpi)}"
+                                                         actionListener="#{controleAgenteRiscoEsp.removerEpi(idxEpi)}"
                                                          process="btnRemoverEpi" update="listaEpis :formEdicao:growl"
                                                          icon="ui-icon-trash"
                                                          onclick="if (!confirm('Confirma a remoção do Epi?'))
@@ -179,7 +167,7 @@
                         <div align="center">
                             <p:commandButton value="Salvar"
                                              icon="ui-icon-disk"
-                                             actionListener="#{controleAgenteRisco.salvar()}"
+                                             actionListener="#{controleAgenteRiscoEsp.salvar()}"
                                              oncomplete="if(!args.validationFailed){PF('dlg').hide();}"
                                              update=":formEdicao :formListagem"/>
                         </div> 
