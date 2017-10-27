@@ -8,6 +8,7 @@ import dao.TipoRiscoDAO;
 import util.Util;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -15,6 +16,7 @@ import modelo.AgenteRisco;
 import modelo.EPI;
 import modelo.Exame;
 import modelo.TipoRisco;
+import util.UtilRelatorios;
 
 @ManagedBean(name = "controleAgenteRisco")
 @ViewScoped
@@ -45,6 +47,19 @@ public class ControleAgenteRisco implements Serializable {
         return "/privado/agenterisco/listar?faces-redirect=true";
     }
 
+    public void imprimeAgenteRisco() {
+        HashMap parametros = new HashMap();
+        UtilRelatorios.imprimeRelatorio("AgenteRisco", parametros, dao.getListaTodos());
+    }
+
+    public void imprimirAgenteRiscoById(Integer id) {
+        objeto = dao.localizar(id);
+        List<AgenteRisco> lista = new ArrayList<>();
+        lista.add(objeto);
+        HashMap parametros = new HashMap();
+        UtilRelatorios.imprimeRelatorio("AgenteRisco", parametros, lista);
+    }
+
     public void adicionarExame() {
         /*if (exame != null){
             if (!objeto.getExames().contains(exame)){
@@ -57,7 +72,7 @@ public class ControleAgenteRisco implements Serializable {
         if (exames != null) {
             exames.forEach((Exame selectedExame) -> {
                 if (!objeto.getExames().contains(selectedExame)) {
-                    Util.mensagemInformacao("Exame "+ selectedExame.getNome() + " adicionado com sucesso!");
+                    Util.mensagemInformacao("Exame " + selectedExame.getNome() + " adicionado com sucesso!");
                     objeto.getExames().add(selectedExame);
                 } else {
                     Util.mensagemErro("Este exame " + selectedExame.getNome() + " já existe na sua lista!");
@@ -77,7 +92,7 @@ public class ControleAgenteRisco implements Serializable {
         if (getEpis() != null) {
             getEpis().forEach((EPI selectedEpi) -> {
                 if (!objeto.getEpis().contains(selectedEpi)) {
-                    Util.mensagemInformacao("EPI "+ selectedEpi.getNome() + " adicionado com sucesso!");
+                    Util.mensagemInformacao("EPI " + selectedEpi.getNome() + " adicionado com sucesso!");
                     objeto.getEpis().add(selectedEpi);
                 } else {
                     Util.mensagemErro("Este EPI " + selectedEpi.getNome() + " já existe na sua lista!");

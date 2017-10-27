@@ -64,6 +64,8 @@
                                              update="@form"
                                              onclick="if (!confirm('Confirma a exclusão?'))
                                                          return false"/>
+                            <p:commandButton action="#{controleAgenteRisco.imprimirAgenteRiscoById(obj.id)}" 
+                                             ajax="false" icon="ui-icon-print" onclick="this.form.target='_blank';"/>
                         </div>
                     </p:column>
                 </p:dataTable>
@@ -91,7 +93,7 @@
                                 </p:panelGrid>
                             </div>                            
                         </p:tab>
-                        
+
                         <p:tab title="Agente de Risco Específicos">    
                             <p:dataTable value="#{controleAgenteRisco.daoAgenteRiscoEsp.listaTodos}"
                                          var="are">
@@ -100,10 +102,10 @@
                                 <p:column headerText="Agentes de Risco Específicos">
                                     <p:outputLabel value="#{are.nome}"/>
                                 </p:column>
-                                                        
+
                             </p:dataTable>
                         </p:tab>
-                        
+
                         <p:tab title="Exames">    
                             <p:dataTable value="#{controleAgenteRisco.objeto.exames}"
                                          var="exa" rowIndexVar="idxExa" id="listaExames">

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SubExames" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b6bf65b7-acf8-457e-a920-0ca96d9e4df4">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="nome" class="java.lang.String">
+		<fieldDescription><![CDATA[nome]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="40" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="50" y="20" width="170" height="20" uuid="e4c8340e-bf2b-4d51-8283-5d5a9a1f1831"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement isPrintRepeatedValues="false" x="0" y="0" width="220" height="20" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="f856f02c-8eb8-4242-89a7-6f0ac2ee54b9"/>
+			</rectangle>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="0" y="0" width="220" height="20" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="946d1f47-dabe-4e1a-8f51-b743e08f221d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[     Exames]]></text>
+			</staticText>
+			<image>
+				<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="40" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="ba060398-4b9d-4e2a-a0fd-dc9126faecbc"/>
+				<imageExpression><![CDATA["/Users/williamfilho/NetBeansProjects/ViewBreim/web/resources/imagens/if_clipboard_283038.png"]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+</jasperReport>

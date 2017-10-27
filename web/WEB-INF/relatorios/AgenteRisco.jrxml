@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AgenteRisco" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c859f792-df09-411c-a6e3-d5bd0bed03cb">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DadosAgenteRisco"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="nome" class="java.lang.String">
+		<fieldDescription><![CDATA[nome]]></fieldDescription>
+	</field>
+	<field name="tipoRisco" class="modelo.TipoRisco">
+		<fieldDescription><![CDATA[tipoRisco]]></fieldDescription>
+	</field>
+	<field name="exames" class="java.util.List">
+		<fieldDescription><![CDATA[exames]]></fieldDescription>
+	</field>
+	<field name="epis" class="java.util.List">
+		<fieldDescription><![CDATA[epis]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="40" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<rectangle>
+				<reportElement x="0" y="-1" width="553" height="40" uuid="f07f67f2-67c2-44e6-96bc-8fd473551f14"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="553" height="39" uuid="5b452d99-6293-482b-85e4-396ae3bce448"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Relatório Agente de Risco]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="60" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="110" y="8" width="180" height="25" uuid="35ae1a3b-fb47-4d4b-a6ce-fb229f4a16ec"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="8" width="163" height="25" uuid="8750e767-718b-4d5c-9064-b7f3d11a7b29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{tipoRisco}.getNome()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="8" width="100" height="25" uuid="f76e5828-2908-47b2-8cb9-f82918886bf0"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Agente de Risco:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="8" width="100" height="25" uuid="43ec800c-5ca4-46cc-92b7-f16c109b88de"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Risco:]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="35" width="280" height="25" uuid="f7f36756-076e-4e8d-ae0f-e1ba6498888d"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource(
+	(java.util.List<modelo.Exame>)$F{exames}
+)]]></dataSourceExpression>
+				<subreportExpression><![CDATA["SubExames.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="280" y="35" width="273" height="25" uuid="745290d0-0cdd-4147-900c-7943a478a740"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource(
+	(java.util.List<modelo.EPI>)$F{epis}
+)]]></dataSourceExpression>
+				<subreportExpression><![CDATA["SubEpis.jasper"]]></subreportExpression>
+			</subreport>
+			<line>
+				<reportElement x="0" y="33" width="553" height="2" uuid="bfaa3fd9-c416-40fa-8768-68956f1f9e60"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="8" width="553" height="1" uuid="68aeebaf-7060-46bd-8993-5063c5bed1d3"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="453" y="0" width="100" height="20" uuid="54ab727f-7612-46c7-b9f6-f6b430f3d9bf"/>
+				<textElement verticalAlignment="Middle">
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
