@@ -22,6 +22,8 @@ import util.UtilRelatorios;
 @ViewScoped
 public class ControleAgenteRisco implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     private AgenteRiscoDAO<AgenteRisco> dao;
     private AgenteRisco objeto;
     private TipoRiscoDAO<TipoRisco> daoTipoRisco;

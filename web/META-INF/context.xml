@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/ViewBreim"/>
+<Context path="/ViewBreim">
+    <!--
+    <Resource name="jdbc/BancoDB"
+    auth="Conteiner"
+    type="javax.sql.DataSource"
+    MaxActive="100"
+    MaxIdle="30"
+    MaxWait="10000"
+    username="root"
+    password="210344"
+    driverClassName="com.mysql.jdbc.Driver"
+    url="jdbc:mysql://localhost:3306/dbace/>
+    -->
+</Context>
+
